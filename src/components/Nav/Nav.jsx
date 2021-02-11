@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import {useSelector} from 'react-redux';
+import TrainerSearch from '../TrainerSearch/TrainerSearch';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -23,6 +24,9 @@ function Nav() {
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link>
       <div>
+        <Link className="navLink" to="/search">
+          Search
+        </Link>
         <Link className="navLink" to={loginLinkData.path}>
           {loginLinkData.text}
         </Link>

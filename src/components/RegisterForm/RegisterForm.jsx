@@ -7,7 +7,10 @@ function RegisterForm() {
   const errors = useSelector((store) => store.errors);
   const [isTrainer, setIsTrainer] = useState(false);
   const [trainerToggle, setTrainerToggle] = React.useState(false);
+  const [isSheHer, setIsSheHer] = React.useState(false);
+  const [personalTrainer, setPersonalTrainer] = React.useState(false);
   const dispatch = useDispatch();
+  const [specialties, setSpecialties] = React.useState([])
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -18,9 +21,20 @@ function RegisterForm() {
         username: username,
         password: password,
         trainer:  trainerToggle,
+        she_her: isSheHer,
+        // specialties: specialties,
+        
       },
     });
   }; // end registerUser
+
+
+const setSheHer = () => {
+
+  console.log('she/her status is set');
+  setIsSheHer(!isSheHer);
+}
+
 
   const setTrainer = () => {
     // change state of isTrainer
@@ -28,6 +42,23 @@ function RegisterForm() {
     setIsTrainer(!isTrainer);
     setTrainerToggle(!trainerToggle);
   };
+
+  const persTrainer = (event) => {
+
+
+console.log(' personal trainer specialty set');
+console.log(event.target.value);
+setSpecialties([event.target.value])
+setPersonalTrainer(!personalTrainer)
+
+
+  }
+
+  const nutrition = (event) => {
+    console.log('nutrition specialty set');
+    console.log(event.target.value);
+    setSpecialties([event.target.value])
+      }
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -62,6 +93,8 @@ function RegisterForm() {
         </label>
       </div>
 
+
+
       <label>
         Check if registering as Coach/Trainer
         <input type="checkbox" 
@@ -70,17 +103,35 @@ function RegisterForm() {
       </label>
 
       {isTrainer ? (
+
         <div>
+          <h4>Select Pronouns</h4>
+         <label>
+            {" "}
+            She/Her
+            <input type="checkbox" 
+            onChange={setSheHer} 
+            />
+            
+          </label>
+
           <label>
             {" "}
             Personal Trainer
-            <input type="checkbox" />
+            <input type="checkbox" 
+            value="1"
+            onChange={persTrainer} 
+            />
+            
           </label>
 
           <label>
             {" "}
             Nutrition
-            <input type="checkbox" />
+            <input type="checkbox" 
+            value="2"
+            onChange={nutrition}
+            />
           </label>
 
           <label>

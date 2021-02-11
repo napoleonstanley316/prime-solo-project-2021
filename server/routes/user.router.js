@@ -21,17 +21,39 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
   const trainer = req.body.trainer;
+  const she_her = req.body.she_her;
+  const personal = req.body.personal;
 
-  const queryText = `INSERT INTO "user" (username, password, trainer)
-    VALUES ($1, $2, $3) RETURNING id`;
+  const queryText = `INSERT INTO "user" (username, password, trainer, she_her)
+    VALUES ($1, $2, $3, $4) RETURNING id`;
   pool
-    .query(queryText, [username, password, trainer])
-    .then(() => res.sendStatus(201))
+    .query(queryText, [username, password, trainer, she_her])
+    .then((result) => {
+      // set the trainer types
+      // insert the data into the user_specialty table
+      // insert user_id (result will have user_id) and specialty_id
+      const queryText = `INSERT INTO "user_specialty".specialty_id (specialties)
+    VALUES ($1, $2, $3, $4) RETURNING id`;
+
+      res.sendStatus(201)
+    
+    })
+
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
     });
 });
+
+
+
+
+
+
+
+
+
+
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route

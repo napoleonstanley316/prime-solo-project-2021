@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import TrainerSearch from '../TrainerSearch/TrainerSearch.jsx';
 
 import './App.css';
 
@@ -100,6 +101,14 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/search"
+          >
+            <TrainerSearch />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
