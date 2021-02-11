@@ -8,9 +8,11 @@ function RegisterForm() {
   const [isTrainer, setIsTrainer] = useState(false);
   const [trainerToggle, setTrainerToggle] = React.useState(false);
   const [isSheHer, setIsSheHer] = React.useState(false);
+  const [isHeHim, setIsHeHim] = React.useState(false);
+  const [isNonBinary, setIsNonBinary] = React.useState(false);
   const [personalTrainer, setPersonalTrainer] = React.useState(false);
   const dispatch = useDispatch();
-  const [specialties, setSpecialties] = React.useState([])
+  const [specialties, setSpecialties] = React.useState([]);
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -20,21 +22,29 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
-        trainer:  trainerToggle,
+        trainer: trainerToggle,
         she_her: isSheHer,
-        // specialties: specialties,
-        
+        he_him: isHeHim,
+        non_binary: isNonBinary,
+       
       },
     });
   }; // end registerUser
 
+  const setSheHer = () => {
+    console.log("she/her status is set");
+    setIsSheHer(!isSheHer);
+  };
 
-const setSheHer = () => {
+  const setHeHim = () => {
+    console.log("he/him status is set");
+    setIsHeHim(!isHeHim);
+  };
 
-  console.log('she/her status is set');
-  setIsSheHer(!isSheHer);
-}
-
+  const setNonBinary = () => {
+    console.log("nonBinary status is set");
+    setIsNonBinary(!isNonBinary);
+  };
 
   const setTrainer = () => {
     // change state of isTrainer
@@ -44,21 +54,17 @@ const setSheHer = () => {
   };
 
   const persTrainer = (event) => {
-
-
-console.log(' personal trainer specialty set');
-console.log(event.target.value);
-setSpecialties([event.target.value])
-setPersonalTrainer(!personalTrainer)
-
-
-  }
+    console.log(" personal trainer specialty set");
+    console.log(event.target.value);
+    setSpecialties([event.target.value]);
+    setPersonalTrainer(!personalTrainer);
+  };
 
   const nutrition = (event) => {
-    console.log('nutrition specialty set');
+    console.log("nutrition specialty set");
     console.log(event.target.value);
-    setSpecialties([event.target.value])
-      }
+    setSpecialties([event.target.value]);
+  };
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -93,45 +99,43 @@ setPersonalTrainer(!personalTrainer)
         </label>
       </div>
 
-
-
       <label>
         Check if registering as Coach/Trainer
-        <input type="checkbox" 
-        onChange={setTrainer} 
-        />
+        <input type="checkbox" onChange={setTrainer} />
       </label>
 
       {isTrainer ? (
-
         <div>
           <h4>Select Pronouns</h4>
-         <label>
+          {/* // logic to set she_her */}
+          <label>
             {" "}
             She/Her
-            <input type="checkbox" 
-            onChange={setSheHer} 
-            />
-            
+            <input type="checkbox" onChange={setSheHer} />
+          </label>
+          {/* logic to set he_him */}
+          <label>
+            {" "}
+            He/Him
+            <input type="checkbox" onChange={setHeHim} />
+          </label>
+          {/* logic to set non binary */}
+          <label>
+            {" "}
+          Non-Binary
+            <input type="checkbox" onChange={setNonBinary} />
           </label>
 
           <label>
             {" "}
             Personal Trainer
-            <input type="checkbox" 
-            value="1"
-            onChange={persTrainer} 
-            />
-            
+            <input type="checkbox" value="1" onChange={persTrainer} />
           </label>
 
           <label>
             {" "}
             Nutrition
-            <input type="checkbox" 
-            value="2"
-            onChange={nutrition}
-            />
+            <input type="checkbox" value="2" onChange={nutrition} />
           </label>
 
           <label>
