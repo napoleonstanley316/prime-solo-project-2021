@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
@@ -11,8 +12,8 @@ function* fetchTrainers() {
     }
   }
 
-function* trainerSaga() {
+function* searchSaga() {
   yield takeLatest('SEARCH', fetchTrainers);
 }
 
-export default trainerSaga;
+export default searchSaga;

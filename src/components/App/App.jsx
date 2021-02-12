@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import TrainerSearch from '../TrainerSearch/TrainerSearch.jsx';
+import TrainerList from '../TrainerList/TrainerList'
 
 import './App.css';
 
@@ -109,6 +110,14 @@ function App() {
             path="/search"
           >
             <TrainerSearch />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/list"
+          >
+            <TrainerList />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

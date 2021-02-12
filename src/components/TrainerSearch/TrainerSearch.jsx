@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SelectSearch from "react-select-search";
 import Select from "react-select";
+import TrainerList from '../TrainerList/TrainerList'
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -12,7 +13,7 @@ function TrainerSearch() {
 
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
+  const trainers = useSelector((store) => store.trainers);
 
   const handleChange = (pronouns) => {
     console.log("search function handleChange");
@@ -32,6 +33,7 @@ function TrainerSearch() {
   };
 
   return (
+     <> 
     <div>
       <h2>Search for Trainers</h2>
       <form onSubmit={handleSubmit}>
@@ -47,8 +49,11 @@ function TrainerSearch() {
         </label>
         <input type="submit" value="Submit" />
       </form>
+
     </div>
-    
+  
+    <TrainerList />
+    </>
   );
 }
 
