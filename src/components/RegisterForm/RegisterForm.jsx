@@ -12,7 +12,7 @@ function RegisterForm() {
   const [isNonBinary, setIsNonBinary] = React.useState(false);
   const [personalTrainer, setPersonalTrainer] = React.useState(false);
   const dispatch = useDispatch();
-  const [specialties, setSpecialties] = React.useState([]);
+  const [specialties, setSpecialties] = useState([]);
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -27,7 +27,6 @@ function RegisterForm() {
         he_him: isHeHim,
         non_binary: isNonBinary,
         specialties: specialties,
-       
       },
     });
   }; // end registerUser
@@ -54,22 +53,16 @@ function RegisterForm() {
     setTrainerToggle(!trainerToggle);
   };
 
-
   // specialties should be an array, but is currently only logging the last specialty that is checked
   // need to figure out how to get all specialties that are checked in the array
   const setSpecialty = (event) => {
-    console.log(" trainer specialty set");
-    console.log(event.target.value);
-    setSpecialties([event.target.value]);
-    // setPersonalTrainer(!personalTrainer);
+    const newSpecialty = event.target.value;
+    console.log(" trainer specialty set to:", event.target.value);
+    // show the array in the console
+    setSpecialties([...specialties, event.target.value]);
   };
 
-  const nutrition = (event) => {
-    console.log("nutrition specialty set");
-    console.log(event.target.value);
-    setSpecialties([event.target.value]);
-  };
-
+  console.log(specialties);
   return (
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
@@ -126,7 +119,7 @@ function RegisterForm() {
           {/* logic to set non binary */}
           <label>
             {" "}
-          Non-Binary
+            Non-Binary
             <input type="checkbox" onChange={setNonBinary} />
           </label>
 
@@ -146,14 +139,12 @@ function RegisterForm() {
             {" "}
             Health Coach
             <input type="checkbox" value="health" onChange={setSpecialty} />
-            <input type="checkbox" />
           </label>
 
           <label>
             {" "}
             Mind & Body
             <input type="checkbox" value="mind" onChange={setSpecialty} />
-            <input type="checkbox" />
           </label>
         </div>
       ) : (
