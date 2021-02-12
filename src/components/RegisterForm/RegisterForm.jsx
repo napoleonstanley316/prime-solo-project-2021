@@ -26,6 +26,7 @@ function RegisterForm() {
         she_her: isSheHer,
         he_him: isHeHim,
         non_binary: isNonBinary,
+        specialties: specialties,
        
       },
     });
@@ -53,11 +54,14 @@ function RegisterForm() {
     setTrainerToggle(!trainerToggle);
   };
 
-  const persTrainer = (event) => {
-    console.log(" personal trainer specialty set");
+
+  // specialties should be an array, but is currently only logging the last specialty that is checked
+  // need to figure out how to get all specialties that are checked in the array
+  const setSpecialty = (event) => {
+    console.log(" trainer specialty set");
     console.log(event.target.value);
     setSpecialties([event.target.value]);
-    setPersonalTrainer(!personalTrainer);
+    // setPersonalTrainer(!personalTrainer);
   };
 
   const nutrition = (event) => {
@@ -129,24 +133,26 @@ function RegisterForm() {
           <label>
             {" "}
             Personal Trainer
-            <input type="checkbox" value="1" onChange={persTrainer} />
+            <input type="checkbox" value="personal" onChange={setSpecialty} />
           </label>
 
           <label>
             {" "}
             Nutrition
-            <input type="checkbox" value="2" onChange={nutrition} />
+            <input type="checkbox" value="nutrition" onChange={setSpecialty} />
           </label>
 
           <label>
             {" "}
             Health Coach
+            <input type="checkbox" value="health" onChange={setSpecialty} />
             <input type="checkbox" />
           </label>
 
           <label>
             {" "}
             Mind & Body
+            <input type="checkbox" value="mind" onChange={setSpecialty} />
             <input type="checkbox" />
           </label>
         </div>

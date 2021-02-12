@@ -24,12 +24,12 @@ router.post('/register', (req, res, next) => {
   const she_her = req.body.she_her;
   const he_him = req.body.he_him;
   const non_binary = req.body.non_binary;
-  const personal = req.body.personal;
+  const specialties = req.body.specialties;
 
-  const queryText = `INSERT INTO "user" (username, password, trainer, she_her, he_him, non_binary)
-    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
+  const queryText = `INSERT INTO "user" (username, password, trainer, she_her, he_him, non_binary, specialties)
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
   pool
-    .query(queryText, [username, password, trainer, she_her, he_him, non_binary])
+    .query(queryText, [username, password, trainer, she_her, he_him, non_binary, specialties])
     .then((result) => {
       // set the trainer types
       // insert the data into the user_specialty table
