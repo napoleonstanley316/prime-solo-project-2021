@@ -42,9 +42,7 @@ function TrainerSearch() {
             Select Pronouns
             <option value="She/Her">She/Her</option>
             <option value="He/Him">He/Him</option>
-            <option selected value="Non-Binary">
-              Non-Binary
-            </option>
+            <option value="Non-Binary">Non-Binary</option>
           </select>
         </label>
         <input type="submit" value="Submit" />

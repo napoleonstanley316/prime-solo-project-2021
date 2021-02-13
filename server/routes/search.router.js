@@ -8,11 +8,15 @@ const {
 /**
  * Get all of the items on the shelf
  */
-router.get("/", (req, res) => {
+router.get("/:pronouns", (req, res) => {
+  
+  const pronouns = req.params.pronouns
+  console.log(pronouns);
+  
   if (req.isAuthenticated()) {
-    const query = `SELECT * FROM "user"`;
+    const query = `SELECT * FROM "user" WHERE "user".pronouns = $1`;
     pool
-      .query(query)
+      .query(query, [pronouns])
       .then((result) => {
         res.send(result.rows);
       })
@@ -27,3 +31,5 @@ router.get("/", (req, res) => {
 
 
 module.exports = router;
+
+

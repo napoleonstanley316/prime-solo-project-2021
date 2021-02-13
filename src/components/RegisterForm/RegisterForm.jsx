@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function RegisterForm() {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
@@ -10,7 +11,7 @@ function RegisterForm() {
   const [isSheHer, setIsSheHer] = React.useState(false);
   const [isHeHim, setIsHeHim] = React.useState(false);
   const [isNonBinary, setIsNonBinary] = React.useState(false);
-  const [personalTrainer, setPersonalTrainer] = React.useState(false);
+  const [pronouns, setPronouns] = React.useState([]);
   const dispatch = useDispatch();
   const [specialties, setSpecialties] = useState([]);
 
@@ -20,6 +21,7 @@ function RegisterForm() {
     dispatch({
       type: "REGISTER",
       payload: {
+        name: name,
         username: username,
         password: password,
         trainer: trainerToggle,
@@ -27,6 +29,7 @@ function RegisterForm() {
         he_him: isHeHim,
         non_binary: isNonBinary,
         specialties: specialties,
+        pronouns: pronouns,
       },
     });
   }; // end registerUser
@@ -62,6 +65,12 @@ function RegisterForm() {
     setSpecialties([...specialties, event.target.value]);
   };
 
+  const setUserPronouns = (event) => {
+    console.log(" trainer specialty set to:", event.target.value);
+    // show the array in the console
+    setPronouns([...pronouns, event.target.value]);
+  };
+
   console.log(specialties);
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -71,6 +80,20 @@ function RegisterForm() {
           {errors.registrationMessage}
         </h3>
       )}
+
+      <div>
+        <label htmlFor="username">
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={name}
+            required
+            onChange={(event) => setName(event.target.value)}
+          />
+        </label>
+      </div>
+
       <div>
         <label htmlFor="username">
           Username:
@@ -96,6 +119,34 @@ function RegisterForm() {
         </label>
       </div>
 
+      <div>
+        <h4>Select Pronouns</h4>
+        {/* // logic to set she_her */}
+        <label>
+          {" "}
+          She/Her
+          <input type="checkbox" value="She/Her" onChange={setUserPronouns} />
+        </label>
+        {/* logic to set he_him */}
+        <label>
+          {" "}
+          He/Him
+          <input type="checkbox" value="He/Him" onChange={setUserPronouns} />
+        </label>
+        {/* logic to set non binary */}
+        <label>
+          {" "}
+          Non-Binary
+          <input
+            type="checkbox"
+            value="Non-Binary"
+            onChange={setUserPronouns}
+          />
+        </label>
+      </div>
+
+      <h3>Trainer Registration</h3>
+
       <label>
         Check if registering as Coach/Trainer
         <input type="checkbox" onChange={setTrainer} />
@@ -103,26 +154,6 @@ function RegisterForm() {
 
       {isTrainer ? (
         <div>
-          <h4>Select Pronouns</h4>
-          {/* // logic to set she_her */}
-          <label>
-            {" "}
-            She/Her
-            <input type="checkbox" onChange={setSheHer} />
-          </label>
-          {/* logic to set he_him */}
-          <label>
-            {" "}
-            He/Him
-            <input type="checkbox" onChange={setHeHim} />
-          </label>
-          {/* logic to set non binary */}
-          <label>
-            {" "}
-            Non-Binary
-            <input type="checkbox" onChange={setNonBinary} />
-          </label>
-
           <label>
             {" "}
             Personal Trainer
