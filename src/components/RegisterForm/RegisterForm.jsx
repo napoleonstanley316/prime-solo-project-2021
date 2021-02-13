@@ -14,6 +14,7 @@ function RegisterForm() {
   const [pronouns, setPronouns] = React.useState([]);
   const dispatch = useDispatch();
   const [specialties, setSpecialties] = useState([]);
+  
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -125,7 +126,7 @@ function RegisterForm() {
         <label>
           {" "}
           She/Her
-          <input type="checkbox" value="She/Her" onChange={setUserPronouns} />
+          <input type="checkbox" value='She/Her' onChange={setUserPronouns} />
         </label>
         {/* logic to set he_him */}
         <label>

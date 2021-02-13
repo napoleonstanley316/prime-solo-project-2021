@@ -8,15 +8,17 @@ const {
 /**
  * Get all of the items on the shelf
  */
-router.get("/:pronouns", (req, res) => {
+router.get("/", (req, res) => {
   
   const pronouns = req.params.pronouns
   console.log(pronouns);
   
   if (req.isAuthenticated()) {
-    const query = `SELECT * FROM "user" WHERE "user".pronouns = $1`;
+    const query = `SELECT *
+    FROM "user"
+    WHERE "user".pronouns = '{"sheHer"}';`;
     pool
-      .query(query, [pronouns])
+      .query(query)
       .then((result) => {
         res.send(result.rows);
       })

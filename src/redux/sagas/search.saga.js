@@ -18,7 +18,7 @@ function* fetchTrainers(action) {
  
     try {
       let pronouns = action.payload
-      const response = yield axios.get(`/api/search/${pronouns}`);
+      const response = yield axios.get(`/api/search`);
       console.log('return trainer with pronouns:', pronouns);
       yield put({ type: "SET_TRAINERS", payload: response.data });
     } catch (error) {
