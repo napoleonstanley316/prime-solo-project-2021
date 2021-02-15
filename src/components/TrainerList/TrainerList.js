@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  HashRouter as Router,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 
 function TrainerList() {
   // reducer that holds trainers from search route results.rows
   const trainers = useSelector((store) => store.trainers);
   const [isRequested, setIsRequested] = useState(false);
   const [requestToggle, setRequestToggle] = useState(false);
+  const user = useSelector((store) => store.user);
+  const history = useHistory();
 
   const dispatch = useDispatch();
   // const handleRequest = () => {
@@ -15,7 +23,11 @@ function TrainerList() {
   //   setRequestToggle(!requestToggle);
   // }
 
-  const handleRequest = (trainer) => {
+  const viewDetails = (trainer) => {
+    history.push("/details");
+  };
+
+  const handleRequest = (trainer, user) => {
     // change state of request button
 
     setIsRequested(!isRequested);
@@ -28,6 +40,8 @@ function TrainerList() {
       type: "REQUEST",
       payload: {
         trainer,
+        user,
+     
       },
     });
   };
@@ -42,7 +56,10 @@ function TrainerList() {
 
             <th>Trainer ID</th>
 
-            <th>Pronouns</th>
+            <th>Specialties</th>
+
+            <th>Trainer Details</th>
+            <th>Request Trainer</th>
           </tr>
         </thead>
         <tbody>
@@ -51,17 +68,22 @@ function TrainerList() {
               <tr>
                 <td>{trainer.username}</td>
                 <td>{trainer.id}</td>
-                <td>{trainer.pronouns}</td>
+                <td>{trainer.specialties}</td>
 
                 {isRequested ? (
                   <td>Request Sent!</td>
                 ) : (
                   <td>
-                    <button onClick={(event) => handleRequest(trainer.id)}>
-                      Request Trainer
+                  <button onClick={(event) => handleRequest(trainer.id, user.name)}>
+                    Request Trainer
+                  </button>
+                </td>
+                )}
+                  <td>
+                    <button onClick={(event) => viewDetails(trainer.id)}>
+                      View Details
                     </button>
                   </td>
-                )}
               </tr>
             );
           })}

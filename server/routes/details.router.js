@@ -8,15 +8,18 @@ const {
 /**
  * Get all of the items on the shelf
  */
-router.get("/", (req, res) => {
+router.get("/:id", (req, res) => {
+  let id = req.params.id;
   if (req.isAuthenticated()) {
     const query = `SELECT *
     FROM "user"
-    WHERE "user".pronouns = '{"sheHer"}';`;
+    WHERE "user".id = $1`;
     pool
-      .query(query)
+      .query(query, [id])
       .then((result) => {
         res.send(result.rows);
+        console.log(result);
+        
       })
       .catch((error) => {
         console.error(error);
@@ -26,5 +29,6 @@ router.get("/", (req, res) => {
     res.sendStatus(403);
   }
 });
+
 
 module.exports = router;
