@@ -27,7 +27,7 @@ const editProfile = () => {
 }
 
 const viewDetails = () => {
-  
+  // this saga route should get the details (profile information) of user that created request for trainer
   console.log("view details of request");
   console.log('payload should be:', user.req_id);
   dispatch({
@@ -48,10 +48,8 @@ setIsTrainer(!isTrainer)
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <h3>Profile Information</h3>
-      <img onClick={editPhoto}
-      src="http://www.canada-work.com/_/rsrc/1531284300421/assistants/female_generic_profile.png"
-      alt="new"
-      />
+      <p><img src={user.image}></img> </p>
+    
       <button onClick={editProfile}>Edit Profile</button>
       <p>Name:<span> {user.name}</span>    <button onClick={editName}>Edit</button></p>
       <p>Pronouns:<span> {user.pronouns}</span>    <button onClick={editPronouns}>Edit</button></p>
@@ -74,3 +72,9 @@ setIsTrainer(!isTrainer)
 
 // this allows us to use <App /> in index.js
 export default UserPage;
+
+
+
+// src="http://www.canada-work.com/_/rsrc/1531284300421/assistants/female_generic_profile.png"
+// alt="new"
+
