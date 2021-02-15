@@ -5,9 +5,12 @@ import axios from 'axios';
 
 function* requestTrainer(action) {
     try {
-      let id = action.payload;
-      yield axios.put(`/api/request/${id}`);
-      console.log(id);
+      let trainer = action.payload.trainer;
+      let user = action.payload.user;
+      const request = yield axios.post(`/api/request/${trainer}/${user}`);
+      console.log('send request to user with an id of:', trainer);
+      console.log('request was sent from user with an id of:', user);
+      
       
     } catch (error) {
       console.error(error);

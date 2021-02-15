@@ -2,12 +2,16 @@ import React from 'react';
 import { useEffect,  } from "react";
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import RequestDetails from '../RequestDetails/RequestDetails.jsx'
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
+  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const [isTrainer, setIsTrainer] = React.useState(false);
+  const [newRequest, setNewRequest] = React.useState(false);
 
 
 const editName = () => {
@@ -34,7 +38,9 @@ const viewDetails = () => {
     type: "REQ_DETAILS",
     payload: user.req_id,
     })
+    history.push('/reqDetails')
 };
+
 
 useEffect(() => {
 if (user.trainer === true) {
@@ -42,6 +48,15 @@ setIsTrainer(!isTrainer)
 }
 
 }, []);
+
+useEffect(() => {
+  if (user.requests === 'New Request') {
+  setNewRequest(!newRequest)
+  }
+  
+  }, []);
+
+
 
   return (
     <div className="container">
@@ -56,11 +71,18 @@ setIsTrainer(!isTrainer)
       {isTrainer ? (
         <div>
      <h3>Requests</h3>
+     {newRequest ? (
      <ul>
        <li>
          {user.requests} <button onClick={viewDetails}>View Details</button>
        </li>
      </ul>
+     ) : (
+
+       console.log('no new requests')
+
+
+     )}
 </div>
       ) : (
         console.log('user not a trainer')

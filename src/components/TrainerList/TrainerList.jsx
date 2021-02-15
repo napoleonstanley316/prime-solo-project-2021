@@ -74,7 +74,7 @@ function TrainerList() {
                   <td>Request Sent!</td>
                 ) : (
                   <td>
-                  <button onClick={(event) => handleRequest(trainer.id, user.name)}>
+                  <button onClick={(event) => handleRequest(trainer.id, user.id)}>
                     Request Trainer
                   </button>
                 </td>

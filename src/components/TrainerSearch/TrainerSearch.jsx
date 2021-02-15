@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SelectSearch from "react-select-search";
 import Select from "react-select";
-import TrainerList from '../TrainerList/TrainerList'
+import TrainerList from '../TrainerList/TrainerList.jsx'
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
