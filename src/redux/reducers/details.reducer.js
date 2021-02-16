@@ -7,6 +7,6 @@ const detailsReducer = (state = [], action) => {
   }
 };
 
-console.log(detailsReducer);
+// console.log(detailsReducer);
 
 export default detailsReducer;

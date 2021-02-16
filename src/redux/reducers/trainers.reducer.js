@@ -7,7 +7,7 @@ const trainersReducer = (state = [], action) => {
     }
   };
 
-  console.log(trainersReducer);
+  // console.log(trainersReducer);
   
   
   // user will be on the redux state at:
