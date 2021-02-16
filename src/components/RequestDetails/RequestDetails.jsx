@@ -10,9 +10,12 @@ function RequestDetails(props) {
   const details = useSelector((state) => state?.details[0]);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const [isAccepted, setIsAccepted] = useState(false);
   console.log("request was made by:", [details]);
 
   const handleAccept = (details, user) => {
+    // setIsAccepted(!isAccepted);
+
     console.log("accept request clicked", details, user);
 
     dispatch({
@@ -27,6 +30,8 @@ function RequestDetails(props) {
   };
 
   return (
+
+    
     <div>
       <img src={details?.image} />
       <h3>Name:{details?.name} </h3>

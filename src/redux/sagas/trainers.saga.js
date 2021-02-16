@@ -9,9 +9,9 @@ import Select from "react-select";
 // this saga will get the trainer information by querying the id of the trainer
 function* getMyTrainers(action) {
   try {
-    let trainers = action.payload;
-    const response = yield axios.get(`/api/my_trainers/${trainers}`);
-    console.log("return trainer with the id:", trainers);
+    let id = action.payload;
+    const response = yield axios.get(`/api/my_trainers/${id}`);
+    console.log("return trainer with the id:", id);
 
     yield put({ type: "SET_MYTRAINERS", payload: response.data });
   } catch (error) {

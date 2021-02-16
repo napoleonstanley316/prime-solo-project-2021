@@ -10,26 +10,34 @@ const {
  */
 router.post("/:details/:user", (req, res) => {
   // trainer is the id of the trainer that we want to add a new request for
-//   const id = req.params.id;
+  //   const id = req.params.id;
 
-  const queryText = `UPDATE "user" SET "requests" = ' ' WHERE id = '45';`;
 
-//   const queryValues = [id];
+const user = req.params.user;
+
+const details = req.params.details;
+
+const queryValues = [user, details]
+
+const queryText = `INSERT INTO "connections" (trainer_id, client_id) VALUES ($1, $2)`;
+  
+
+  //   const queryValues = [id];
   pool
-    .query(queryText)
+    .query(queryText, queryValues)
     .then((result) => {
-    //   const user = req.params.user;
+      //   const user = req.params.user;
       // sets req_id = to user.id of requester
-      const queryText = `UPDATE "user" SET "trainer_id" = '45' WHERE id = '48';`;
-    //   const queryValues = [user, trainer]
-      pool.query(queryText);
+      const user = req.params.user
+      const queryValues = [user]
+
+      const queryText = `UPDATE "user" SET "requests" = ' ' WHERE id = $1;`;
+      //   const queryValues = [user, trainer]
+      pool.query(queryText, queryValues);
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.error(
-        "Error adding user to trainer in accept.router",
-        error
-      );
+      console.error("Error adding user to trainer in accept.router", error);
       res.sendStatus(500);
     });
 });

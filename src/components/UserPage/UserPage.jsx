@@ -31,6 +31,18 @@ function UserPage() {
     console.log("edit profile clicked");
   };
 
+
+const deleteTrainer = (event, user) => {
+  console.log('delete trainer clicked');
+  dispatch({ type: "DELETE_TRAINER", 
+ payload: 
+ {event,
+ user,},
+
+});
+}
+
+
   const viewDetails = () => {
     // this saga route should get the details (profile information) of user that created request for trainer
     console.log("view details of request");
@@ -55,8 +67,11 @@ function UserPage() {
   }, []);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_MYTRAINERS", payload: user.trainer_id });
+    dispatch({ type: "FETCH_MYTRAINERS", payload: user.id });
   }, []);
+console.log(myTrainers.trainer_id);
+
+
 
   return (
     <div className="container">
@@ -94,6 +109,7 @@ function UserPage() {
           ) : (
             console.log("no new requests")
           )}
+          <h3>Client History</h3>
         </div>
       ) : (
         // console.log('user not a trainer')
@@ -103,16 +119,20 @@ function UserPage() {
           {myTrainers.map((myTrainer) => (
             <ul>
               <li>
+                <p>Trainer Info</p>
               <img src={myTrainer.image}></img>
 
               {myTrainer.name}
               {myTrainer.pronouns}
-              <button>Delete Trainer</button>
+              <button onClick={(event) => deleteTrainer(myTrainer.trainer_id, user.id)}>Delete Trainer</button>
+              
               </li>
             </ul>
-          ))}
+          ))} 
+          <h3>Coach History</h3>
         </div>
       )}
+    
       <LogOutButton className="btn" />
     </div>
   );

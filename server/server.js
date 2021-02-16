@@ -14,6 +14,7 @@ const requestRouter = require("./routes/request.router");
 const detailsRouter = require("./routes/details.router");
 const acceptRouter = require("./routes/accept.router");
 const myTrainersRouter = require("./routes/my_trainers.router");
+const deleteTrainerRouter = require("./routes/delete.router");
 
 
 myTrainersRouter
@@ -36,6 +37,7 @@ app.use("/api/request", requestRouter);
 app.use("/api/details", detailsRouter);
 app.use("/api/accept", acceptRouter);
 app.use("/api/my_trainers", myTrainersRouter);
+app.use("/api/deleteTrainer", deleteTrainerRouter);
 
 
 
