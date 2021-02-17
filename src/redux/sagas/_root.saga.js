@@ -8,6 +8,7 @@ import detailsSaga from "./details.saga";
 import acceptSaga from "./accept.saga"
 import myTrainersSaga from "./trainers.saga"
 import deleteTrainerSaga from "./deleteTrainer.saga"
+import editProfileSaga from "./editProfile.saga"
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     acceptSaga(),
     myTrainersSaga(),
     deleteTrainerSaga(),
+    editProfileSaga(),
 
   ]);
 }

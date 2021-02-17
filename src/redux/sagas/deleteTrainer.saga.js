@@ -5,8 +5,8 @@ import { eventChannel } from "redux-saga";
 function* deleteTrainer(action) {
   try {
     // request the id of the user that made the request to the trainer
-     const user = action.payload.user;
-    const trainer = action.payload.event;
+     const user = action.payload.userId;
+    const trainer = action.payload.myTrainerId;
    
 
     const response = yield axios.delete(`/api/deleteTrainer/${user}/${trainer}`);

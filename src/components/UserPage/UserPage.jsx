@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -7,14 +7,21 @@ import RequestDetails from "../RequestDetails/RequestDetails.jsx";
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
+  const [name, setName] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const [isTrainer, setIsTrainer] = React.useState(false);
   const [newRequest, setNewRequest] = React.useState(false);
+  const [inEditMode, setInEditMode] = React.useState(false);
   const myTrainers = useSelector((store) => store.myTrainers);
+  const deleteMyTrainerReducer = useSelector(
+    (store) => store.deleteMyTrainerReducer
+  );
 
-  console.log({ myTrainers });
+  // console.log({ deleteMyTrainerReducer });
+  // console.log({ myTrainers });
+
   const editName = () => {
     console.log("edit name button clicked");
   };
@@ -27,21 +34,24 @@ function UserPage() {
     console.log("edit photo clicked");
   };
 
-  const editProfile = () => {
+
+
+  
+  const editProfile = (event) => {
+    event.preventDefault();
     console.log("edit profile clicked");
+    setInEditMode(!inEditMode);
+    dispatch({
+      type: "EDIT_PROFILE",
+      payload: 
+        name,
+    });
   };
 
-
-const deleteTrainer = (event, user) => {
-  console.log('delete trainer clicked');
-  dispatch({ type: "DELETE_TRAINER", 
- payload: 
- {event,
- user,},
-
-});
-}
-
+  const deleteTrainer = (myTrainerId, userId) => {
+    console.log("delete trainer clicked");
+    dispatch({ type: "DELETE_TRAINER", payload: { myTrainerId, userId } });
+  };
 
   const viewDetails = () => {
     // this saga route should get the details (profile information) of user that created request for trainer
@@ -69,27 +79,43 @@ const deleteTrainer = (event, user) => {
   useEffect(() => {
     dispatch({ type: "FETCH_MYTRAINERS", payload: user.id });
   }, []);
-console.log(myTrainers.trainer_id);
-
-
+  console.log(myTrainers.trainer_id);
 
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <h3>Profile Information</h3>
+      <h3>Edit Profile</h3>
+
       <p>
         <img src={user.image}></img>{" "}
       </p>
 
       <button onClick={editProfile}>Edit Profile</button>
-      <p>
-        Name:<span> {user.name}</span> <button onClick={editName}>Edit</button>
-      </p>
-      <p>
-        Pronouns:<span> {user.pronouns}</span>{" "}
-        <button onClick={editPronouns}>Edit</button>
-      </p>
+      {inEditMode ? (
+        <>
+          <p>In edit mode</p>
+          <form onSubmit={editProfile}>
+          <input
+            name="name"
+            value={name}
+            required
+            onChange={(event) => setName(event.target.value)} />
+   
+          <button className="btn" type="submit" >Save</button>
+          </form>
+        </>
+      ) : (
+        <>
+          <p>
+            Name:<span> {user.name}</span>
+          </p>
+          <p>
+            Pronouns:<span> {user.pronouns}</span>{" "}
+          </p>
+        </>
+      )}
 
       {isTrainer ? (
         <div>
@@ -120,19 +146,27 @@ console.log(myTrainers.trainer_id);
             <ul>
               <li>
                 <p>Trainer Info</p>
-              <img src={myTrainer.image}></img>
+                <img src={myTrainer.image}></img>
 
-              {myTrainer.name}
-              {myTrainer.pronouns}
-              <button onClick={(event) => deleteTrainer(myTrainer.trainer_id, user.id)}>Delete Trainer</button>
-              
+                {myTrainer.name}
+                {myTrainer.pronouns}
+                <button
+                  onClick={(event) =>
+                    deleteTrainer(myTrainer.trainer_id, user.id)
+                  }
+                >
+                  Delete Trainer
+                </button>
               </li>
             </ul>
-          ))} 
+          ))}
           <h3>Coach History</h3>
+          <ul>
+            <li>{/* {trainerHistory} */}</li>
+          </ul>
         </div>
       )}
-    
+
       <LogOutButton className="btn" />
     </div>
   );

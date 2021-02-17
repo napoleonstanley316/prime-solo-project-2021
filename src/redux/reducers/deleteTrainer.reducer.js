@@ -7,6 +7,6 @@ const deleteMyTrainerReducer = (state = [], action) => {
   }
 };
 
-// console.log(deleteMyTrainerReducer);
+
 
 export default deleteMyTrainerReducer;
