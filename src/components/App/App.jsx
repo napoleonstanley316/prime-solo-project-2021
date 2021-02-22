@@ -6,6 +6,10 @@ import {
   Switch,
 } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
 import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
 import { useDispatch } from "react-redux";
 
@@ -30,11 +34,21 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
 
+
+  const theme = createMuiTheme({
+    palette: {
+type: "dark",
+    },
+  });
+  
+
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={theme}>
+      <Paper>
     <Router>
       <div>
         <Nav />
@@ -144,9 +158,11 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
+    </Paper>
+    </ThemeProvider>
   );
 }
 

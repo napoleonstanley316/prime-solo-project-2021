@@ -139,13 +139,13 @@ function UserPage() {
         <div>
           <h3>Current Clients</h3>
           {myClients.map((myClient) => (
-            <ul>
-              <li>
-                <img src={myClient.image} width="150" height="200" ></img>
+            // <ul>
+            //   <li>
+            <p>
+                <img src={myClient.image} width="350" height="220" ></img><p>  </p>
+                <p>{myClient.name}</p>
 
-                {myClient.name}
-
-                {myClient.pronouns}
+                <p>{myClient.pronouns}</p>
                 <button
                   onClick={(event) =>
                     deleteTrainer(myClient.client_id, user.id)
@@ -153,8 +153,9 @@ function UserPage() {
                 >
                       Delete Client
                 </button>
-              </li>
-            </ul>
+                </p>
+            //   </li>
+            // </ul>
           ))}
           <h3>Requests</h3>
 
@@ -176,13 +177,12 @@ function UserPage() {
           <h1>My Coaches</h1>
 
           {myTrainers.map((myTrainer) => (
-            <ul>
-              <li>
+           <p>
                 {/* <p>Trainer Info</p> */}
-                <img src={myTrainer.image} width="375" height="225"></img>
+                <img src={myTrainer.image} width="375" height="300"></img>
 
-                {myTrainer.name}
-                {myTrainer.pronouns}
+                <p>Name:  <span>{myTrainer.name}</span></p>
+                <p>Pronouns:  <span>{myTrainer.pronouns}</span></p>
                 <button
                   onClick={(event) =>
                     deleteTrainer(myTrainer.id, user.id)
@@ -190,8 +190,8 @@ function UserPage() {
                 >
                   Delete Trainer
                 </button>
-              </li>
-            </ul>
+                </p>
+            
           ))}
           <h3>Coach History</h3>
           <ul>
