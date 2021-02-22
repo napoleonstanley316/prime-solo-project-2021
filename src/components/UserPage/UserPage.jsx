@@ -15,12 +15,16 @@ function UserPage() {
   const [newRequest, setNewRequest] = React.useState(false);
   const [inEditMode, setInEditMode] = React.useState(false);
   const myTrainers = useSelector((store) => store.myTrainers);
+  const myClients = useSelector((store) => store.myClients);
+  const clientListReducer = useSelector((store) => store.clientListReducer);
   const deleteMyTrainerReducer = useSelector(
     (store) => store.deleteMyTrainerReducer
   );
 
-  // console.log({ deleteMyTrainerReducer });
-  // console.log({ myTrainers });
+  console.log({ deleteMyTrainerReducer });
+  console.log({ myTrainers });
+  console.log({myClients});
+  console.log({clientListReducer});
 
   const editName = () => {
     console.log("edit name button clicked");
@@ -43,10 +47,12 @@ function UserPage() {
     setInEditMode(!inEditMode);
     dispatch({
       type: "EDIT_PROFILE",
-      payload: 
-        name,
-    });
+      payload: {
+        name, 
+        user: user.id,
+   } });
   };
+
 
   const deleteTrainer = (myTrainerId, userId) => {
     console.log("delete trainer clicked");
@@ -76,20 +82,32 @@ function UserPage() {
     }
   }, []);
 
+    useEffect(() => {
+    dispatch({ type: "FETCH_MYCLIENTS", payload: user.id });
+  }, []);
+
   useEffect(() => {
     dispatch({ type: "FETCH_MYTRAINERS", payload: user.id });
   }, []);
   console.log(myTrainers.trainer_id);
 
+  // useEffect(() => {
+  //   dispatch({ type: "RETURN_MYCLIENTS", payload: {myClients} });
+  // }, []);
+
+
+
+  console.log(myTrainers.trainer_id);
+
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      <h2>Welcome, {user.name}!</h2>
+      
       <h3>Profile Information</h3>
-      <h3>Edit Profile</h3>
+      
 
       <p>
-        <img src={user.image}></img>{" "}
+        <img src={user.image} width="375" height="225"></img>{" "}
       </p>
 
       <button onClick={editProfile}>Edit Profile</button>
@@ -120,9 +138,24 @@ function UserPage() {
       {isTrainer ? (
         <div>
           <h3>Current Clients</h3>
-          <ul>
-            <li></li>
-          </ul>
+          {myClients.map((myClient) => (
+            <ul>
+              <li>
+                <img src={myClient.image} width="150" height="200" ></img>
+
+                {myClient.name}
+
+                {myClient.pronouns}
+                <button
+                  onClick={(event) =>
+                    deleteTrainer(myClient.client_id, user.id)
+                  }
+                >
+                      Delete Client
+                </button>
+              </li>
+            </ul>
+          ))}
           <h3>Requests</h3>
 
           {newRequest ? (
@@ -145,14 +178,14 @@ function UserPage() {
           {myTrainers.map((myTrainer) => (
             <ul>
               <li>
-                <p>Trainer Info</p>
-                <img src={myTrainer.image}></img>
+                {/* <p>Trainer Info</p> */}
+                <img src={myTrainer.image} width="375" height="225"></img>
 
                 {myTrainer.name}
                 {myTrainer.pronouns}
                 <button
                   onClick={(event) =>
-                    deleteTrainer(myTrainer.trainer_id, user.id)
+                    deleteTrainer(myTrainer.id, user.id)
                   }
                 >
                   Delete Trainer
@@ -162,7 +195,7 @@ function UserPage() {
           ))}
           <h3>Coach History</h3>
           <ul>
-            <li>{/* {trainerHistory} */}</li>
+            
           </ul>
         </div>
       )}

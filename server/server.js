@@ -16,9 +16,9 @@ const acceptRouter = require("./routes/accept.router");
 const myTrainersRouter = require("./routes/my_trainers.router");
 const deleteTrainerRouter = require("./routes/delete.router");
 const editProfileRouter = require("./routes/edit.router");
+const myClientsRouter = require("./routes/clients.router");
+const clientListRouter = require("./routes/client_list.router");
 
-
-myTrainersRouter
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -40,6 +40,8 @@ app.use("/api/accept", acceptRouter);
 app.use("/api/my_trainers", myTrainersRouter);
 app.use("/api/deleteTrainer", deleteTrainerRouter);
 app.use("/api/editProfile", editProfileRouter);
+app.use("/api/my_clients", myClientsRouter);
+app.use("/api/clientList", clientListRouter);
 
 
 

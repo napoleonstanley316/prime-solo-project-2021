@@ -15,8 +15,8 @@ function RequestDetails(props) {
 
   const handleAccept = (details, user) => {
     // setIsAccepted(!isAccepted);
-
-    console.log("accept request clicked", details, user);
+console.log(details);
+    // console.log("accept request clicked", details, user);
 
     dispatch({
       type: "ACCEPT",
@@ -45,9 +45,3 @@ function RequestDetails(props) {
 }
 
 export default RequestDetails;
-// <div>
-//   <h2>{heading}</h2>
-
-//   <h5>Details of Request</h5>
-//   <p></p>
-// </div>

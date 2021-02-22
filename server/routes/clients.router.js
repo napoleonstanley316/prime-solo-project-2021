@@ -14,8 +14,8 @@ router.get("/:id", (req, res) => {
   if (req.isAuthenticated()) {
     const query = `SELECT * 
     FROM "connections"
-    JOIN "user" ON "user".id = "connections".trainer_id
-    WHERE "connections".client_id = $1`;
+    JOIN "user" ON "user".id = "connections".client_id
+    WHERE "connections".trainer_id = $1`;
     pool
       .query(query, [queryText])
       .then((result) => {
@@ -34,3 +34,7 @@ router.get("/:id", (req, res) => {
 
 
 module.exports = router;
+
+// SELECT "connections".client_id
+//     FROM "connections"
+//     WHERE trainer_id 

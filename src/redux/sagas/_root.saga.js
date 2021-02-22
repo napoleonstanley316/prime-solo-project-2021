@@ -5,10 +5,12 @@ import userSaga from "./user.saga";
 import searchSaga from "./search.saga";
 import requestSaga from "./request.saga";
 import detailsSaga from "./details.saga";
-import acceptSaga from "./accept.saga"
-import myTrainersSaga from "./trainers.saga"
-import deleteTrainerSaga from "./deleteTrainer.saga"
-import editProfileSaga from "./editProfile.saga"
+import acceptSaga from "./accept.saga";
+import myTrainersSaga from "./trainers.saga";
+import deleteTrainerSaga from "./deleteTrainer.saga";
+import editProfileSaga from "./editProfile.saga";
+import myClientsSaga from "./my_clients.saga";
+import clientListSaga from "./clientList.saga";
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,6 +31,9 @@ export default function* rootSaga() {
     myTrainersSaga(),
     deleteTrainerSaga(),
     editProfileSaga(),
+    myClientsSaga(),
+    clientListSaga(),
+
 
   ]);
 }

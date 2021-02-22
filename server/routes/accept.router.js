@@ -42,4 +42,8 @@ const queryText = `INSERT INTO "connections" (trainer_id, client_id) VALUES ($1,
     });
 });
 
+
+
+
+
 module.exports = router;

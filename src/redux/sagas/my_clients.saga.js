@@ -7,20 +7,20 @@ import SelectSearch from "react-select-search";
 import Select from "react-select";
 
 // this saga will get the trainer information by querying the id of the trainer
-function* getMyTrainers(action) {
+function* getMyClients(action) {
   try {
     let id = action.payload;
-    const response = yield axios.get(`/api/my_trainers/${id}`);
-    console.log("return trainers assigned to the user with an id of:", id);
+    const response = yield axios.get(`/api/my_clients/${id}`);
+    console.log("return clients from the trainer with an id of:", id);
 
-    yield put({ type: "SET_MYTRAINERS", payload: response.data });
+    yield put({ type: "SET_MYCLIENTS", payload: response.data });
   } catch (error) {
     console.error(error);
   }
 }
 
-function* myTrainersSaga() {
-  yield takeLatest("FETCH_MYTRAINERS", getMyTrainers);
+function* myClientsSaga() {
+  yield takeLatest("FETCH_MYCLIENTS", getMyClients);
 }
 
-export default myTrainersSaga;
+export default myClientsSaga;

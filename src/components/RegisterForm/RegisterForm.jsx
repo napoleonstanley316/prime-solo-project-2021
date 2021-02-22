@@ -11,10 +11,13 @@ function RegisterForm() {
   const [isSheHer, setIsSheHer] = React.useState(false);
   const [isHeHim, setIsHeHim] = React.useState(false);
   const [isNonBinary, setIsNonBinary] = React.useState(false);
-  const [pronouns, setPronouns] = React.useState([]);
+  const [isPersonal, setIsPersonal] = React.useState(false);
+  const [isNutrition, setIsNutrition] = React.useState(false);
+  const [isMind, setIsMind] = React.useState(false);
+  const [isHealth, setIsHealth] = React.useState(false);
+  const [pronouns, setPronouns] = React.useState("");
   const dispatch = useDispatch();
   const [specialties, setSpecialties] = useState([]);
-  
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -29,11 +32,32 @@ function RegisterForm() {
         she_her: isSheHer,
         he_him: isHeHim,
         non_binary: isNonBinary,
-        specialties: specialties,
+        personal: isPersonal,
+        nutrition: isNutrition,
+        health: isHealth,
+        mind: isMind,
         pronouns: pronouns,
+        // specialties: specialties,
       },
     });
   }; // end registerUser
+
+
+
+
+  const handleChange = (event) => {
+    console.log("set pronouns function handleChange");
+    setPronouns(event);
+    
+  };
+
+
+
+
+
+
+
+
 
   const setSheHer = () => {
     console.log("she/her status is set");
@@ -59,15 +83,36 @@ function RegisterForm() {
 
   // specialties should be an array, but is currently only logging the last specialty that is checked
   // need to figure out how to get all specialties that are checked in the array
-  const setSpecialty = (event) => {
-    const newSpecialty = event.target.value;
-    console.log(" trainer specialty set to:", event.target.value);
-    // show the array in the console
-    setSpecialties([...specialties, event.target.value]);
+  const setPersonal = () => {
+    setIsPersonal(!isPersonal);
+    console.log(isPersonal);
   };
 
+  const setNutrition = () => {
+    console.log('clicked nutrition');
+    setIsNutrition(!isNutrition);
+    console.log(isNutrition);
+  };
+
+  const setMind = () => {
+    console.log('clicked mind');
+    setIsMind(!isMind);
+    console.log(isMind);
+  };
+
+  const setHealth = () => {
+    console.log('clicked health');
+    setIsHealth(!isHealth);
+    console.log(isHealth);
+  };
+
+  // const newSpecialty = event.target.value;
+  // console.log(" trainer specialty set to:", event.target.value);
+  // show the array in the console
+  // setSpecialties([...specialties, event.target.value]);
+
   const setUserPronouns = (event) => {
-    console.log(" trainer specialty set to:", event.target.value);
+    console.log(" pronouns set to:", event.target.value);
     // show the array in the console
     setPronouns([...pronouns, event.target.value]);
   };
@@ -120,13 +165,52 @@ function RegisterForm() {
         </label>
       </div>
 
+
+      <div>
+        <h2>Pronouns</h2>
+ 
+            <select
+              value={pronouns}
+              onChange={(event) => handleChange(event.target.value)}
+            >
+              Select Pronouns
+              <option>Select Pronouns</option>
+              <option value="She/Her">She/Her</option>
+              <option value="He/Him">He/Him</option>
+              <option value="Non-Binary">Non-Binary</option>
+            </select>
+
+      </div>
+
+
+
+       {/* <form onSubmit={handleSubmit}>
+          <label> */}
+
+          {/* </label>
+          <input type="submit" value="Submit" />
+        </form> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div>
         <h4>Select Pronouns</h4>
         {/* // logic to set she_her */}
         <label>
           {" "}
           She/Her
-          <input type="checkbox" value='She/Her' onChange={setUserPronouns} />
+          <input type="checkbox" value="She/Her" onChange={setUserPronouns} />
         </label>
         {/* logic to set he_him */}
         <label>
@@ -156,27 +240,24 @@ function RegisterForm() {
       {isTrainer ? (
         <div>
           <label>
-            {" "}
             Personal Trainer
-            <input type="checkbox" value="personal" onChange={setSpecialty} />
+            <input type="checkbox" value="personal" onChange={setPersonal} />
           </label>
 
           <label>
-            {" "}
             Nutrition
-            <input type="checkbox" value="nutrition" onChange={setSpecialty} />
+            <input type="checkbox" value="nutrition" onChange={setNutrition} />
           </label>
 
           <label>
-            {" "}
             Health Coach
-            <input type="checkbox" value="health" onChange={setSpecialty} />
+            <input type="checkbox" value="health" onChange={setHealth} />
           </label>
 
           <label>
             {" "}
             Mind & Body
-            <input type="checkbox" value="mind" onChange={setSpecialty} />
+            <input type="checkbox" value="mind" onChange={setMind} />
           </label>
         </div>
       ) : (

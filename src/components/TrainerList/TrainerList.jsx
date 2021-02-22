@@ -29,9 +29,9 @@ function TrainerList() {
 
   const handleRequest = (trainer, user) => {
     // change state of request button
-
+console.log(trainer, user);
     setIsRequested(!isRequested);
-    setRequestToggle(!requestToggle);
+    // setRequestToggle(!requestToggle);
     console.log("request toggle");
 
     // this logic will trigger the REQUEST in requestSaga
@@ -52,13 +52,13 @@ function TrainerList() {
       <table>
         <thead>
           <tr>
+            <th>Trainer Image</th>
+
             <th>Trainer Name</th>
 
-            <th>Trainer ID</th>
+            {/* <th>Specialties</th> */}
 
-            <th>Specialties</th>
-
-            <th>Trainer Details</th>
+            <th>Pronouns</th>
             <th>Request Trainer</th>
           </tr>
         </thead>
@@ -66,24 +66,20 @@ function TrainerList() {
           {trainers.map((trainer) => {
             return (
               <tr>
-                <td>{trainer.username}</td>
-                <td>{trainer.id}</td>
-                <td>{trainer.specialties}</td>
+                <td><img src={trainer.image} alt="profile image" width="100" height="100"></img>
+                </td>
+                <td>{trainer.name}</td>
+                <td>{trainer.pronouns}</td>
 
-                {isRequested ? (
-                  <td>Request Sent!</td>
-                ) : (
+                {isRequested ? ( 
+                  <td>Request Sent!</td> 
+                ) : ( 
                   <td>
-                  <button onClick={(event) => handleRequest(trainer.id, user.id)}>
+                  <button onClick={() => handleRequest(trainer.id, user.id)}>
                     Request Trainer
                   </button>
                 </td>
                 )}
-                  <td>
-                    <button onClick={(event) => viewDetails(trainer.id)}>
-                      View Details
-                    </button>
-                  </td>
               </tr>
             );
           })}

@@ -12,10 +12,10 @@ router.get("/:id", (req, res) => {
   let id = req.params.id;
   const queryText = id
   if (req.isAuthenticated()) {
-    const query = `SELECT * 
-    FROM "connections"
-    JOIN "user" ON "user".id = "connections".trainer_id
-    WHERE "connections".client_id = $1`;
+    const query = `SELECT *
+    FROM "user"
+    WHERE "user".id = $1`;
+
     pool
       .query(query, [queryText])
       .then((result) => {

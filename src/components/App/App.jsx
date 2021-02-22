@@ -5,7 +5,8 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-
+import Button from '@material-ui/core/Button';
+import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
 import { useDispatch } from "react-redux";
 
 import Nav from "../Nav/Nav";

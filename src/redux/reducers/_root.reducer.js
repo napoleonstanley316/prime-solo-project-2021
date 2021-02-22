@@ -4,8 +4,9 @@ import user from './user.reducer';
 import trainers from './trainers.reducer';
 import details from './details.reducer';
 import myTrainers from './myTrainers.reducer';
+import myClients from './myClients.reducer'
 import deleteMyTrainerReducer from './deleteTrainer.reducer';
-
+import clientListReducer from './clientList.reducer';
 
 
 // import deleteTrainer from './deleteTrainer.reducer'
@@ -23,7 +24,9 @@ const rootReducer = combineReducers({
   trainers,
   details,
   myTrainers,
+  myClients,
   deleteMyTrainerReducer,
+  clientListReducer,
   
 });
 

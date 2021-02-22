@@ -8,11 +8,14 @@ const {
 /**
  * Get all of the items on the shelf
  */
-router.get("/", (req, res) => {
+router.get("/:specialty", (req, res) => {
+
+  const queryText = req.params.specialty;
+  console.log(queryText);
+  
   if (req.isAuthenticated()) {
-    const query = `SELECT *
-    FROM "user"
-    WHERE "user".pronouns = '{"sheHer"}';`;
+    const query = `SELECT * FROM "user" 
+    WHERE "user".${queryText} = TRUE`;
     pool
       .query(query)
       .then((result) => {

@@ -9,11 +9,14 @@ import Select from "react-select";
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchTrainers(action) {
   try {
-    let trainerSearch = action.payload;
-    const response = yield axios.get(`/api/search`);
-    console.log("return trainer with pronouns:", trainerSearch);
+    let specialty = action.payload;
+    console.log(specialty);
+    
+    const response = yield axios.get(`/api/search/${specialty}`);
+    console.log("return trainer with a specialty of:", specialty);
    
     console.log(action.payload);
+    // console.log(specialty);
     
     yield put({ type: "SET_TRAINERS", payload: response.data });
   } catch (error) {
