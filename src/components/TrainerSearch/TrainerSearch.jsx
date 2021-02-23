@@ -3,11 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import SelectSearch from "react-select-search";
 import Select from "react-select";
 import TrainerList from "../TrainerList/TrainerList.jsx";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+import './TrainerSearch.css'
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 function TrainerSearch() {
+
+  const theme = createMuiTheme({
+    palette: {
+type: "dark",
+    },
+  });
   const [pronouns, setPronouns] = useState("");
   const [specialty, setSpecialty] = useState("");
 
@@ -34,11 +43,14 @@ function TrainerSearch() {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <Paper>
+   
+
       <div>
         <h2>Search for Trainers</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
+        <form  onSubmit={handleSubmit} >
+          
             <select
               value={specialty}
               onChange={(event) => handleChange(event.target.value)}
@@ -50,13 +62,14 @@ function TrainerSearch() {
               <option value="mind">Mind & Body</option>
               <option value="health">Health Coaching</option>
             </select>
-          </label>
+          
           <input type="submit" value="Submit" />
         </form>
-      </div>
-
       <TrainerList />
-    </>
+   </div>
+</Paper>
+    </ThemeProvider> 
   );
 }
 export default TrainerSearch;
+    

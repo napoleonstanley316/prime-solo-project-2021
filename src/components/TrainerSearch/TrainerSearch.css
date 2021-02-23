@@ -1,0 +1,12 @@
+.body {
+    /* flex box layout */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    margin: 0 0 30px;
+    background-color: #859494;
+    overflow: hidden;
+    background-image: url("https://image.shutterstock.com/image-photo/sport-fitness-items-on-dark-600w-340324457.jpg");
+    
+  }

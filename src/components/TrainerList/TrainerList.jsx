@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+import './TrainerList.css'
 import {
   HashRouter as Router,
   Route,
@@ -8,6 +11,17 @@ import {
 } from "react-router-dom";
 
 function TrainerList() {
+
+
+
+  const theme = createMuiTheme({
+    palette: {
+type: "dark",
+    },
+  });
+
+
+
   // reducer that holds trainers from search route results.rows
   const trainers = useSelector((store) => store.trainers);
   const [isRequested, setIsRequested] = useState(false);
@@ -47,6 +61,10 @@ console.log(trainer, user);
   };
 
   return (
+    <ThemeProvider theme={theme}>
+    <Paper className="paper">
+ 
+
     <div>
       <h2>Search Results</h2>
       <table>
@@ -54,11 +72,11 @@ console.log(trainer, user);
           <tr>
             <th>Trainer Image</th>
 
-            <th>Trainer Name</th>
+            <th>Name       </th>
 
             {/* <th>Specialties</th> */}
 
-            <th>Pronouns</th>
+            <th>Pronouns     </th>
             <th>Request Trainer</th>
           </tr>
         </thead>
@@ -66,8 +84,7 @@ console.log(trainer, user);
           {trainers.map((trainer) => {
             return (
               <tr>
-                <td><img src={trainer.image} alt="profile image" width="100" height="100"></img>
-                </td>
+                <td><img src={trainer.image} alt="profile image" width="250" height="250"></img></td>
                 <td>{trainer.name}</td>
                 <td>{trainer.pronouns}</td>
 
@@ -86,6 +103,10 @@ console.log(trainer, user);
         </tbody>
       </table>
     </div>
+
+    </Paper>
+    </ThemeProvider> 
+
   );
 }
 

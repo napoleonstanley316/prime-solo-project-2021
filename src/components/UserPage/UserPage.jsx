@@ -4,8 +4,24 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import RequestDetails from "../RequestDetails/RequestDetails.jsx";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
 
 function UserPage() {
+
+
+  const theme = createMuiTheme({
+    palette: {
+type: "dark",
+    },
+  });
+
+
+
+
+
+
+
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const [name, setName] = useState("");
   const history = useHistory();
@@ -100,14 +116,16 @@ function UserPage() {
   console.log(myTrainers.trainer_id);
 
   return (
-    <div className="container">
+    <ThemeProvider theme={theme}>
+    <Paper>
+    <div    className="container" >
       <h2>Welcome, {user.name}!</h2>
       
       <h3>Profile Information</h3>
       
 
       <p>
-        <img src={user.image} width="375" height="225"></img>{" "}
+        <img src={user.image} width="375" height="330"></img>{" "}
       </p>
 
       <button onClick={editProfile}>Edit Profile</button>
@@ -142,7 +160,7 @@ function UserPage() {
             // <ul>
             //   <li>
             <p>
-                <img src={myClient.image} width="350" height="220" ></img><p>  </p>
+                <img src={myClient.image} width="375" height="330" ></img><p>  </p>
                 <p>{myClient.name}</p>
 
                 <p>{myClient.pronouns}</p>
@@ -202,6 +220,8 @@ function UserPage() {
 
       <LogOutButton className="btn" />
     </div>
+    </Paper>
+    </ThemeProvider> 
   );
 }
 

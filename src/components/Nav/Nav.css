@@ -5,8 +5,10 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: #00acb0;
+  background-color: #859494;
   overflow: hidden;
+  background-image: url("https://i.pinimg.com/564x/96/6a/7b/966a7b0fa51a0e145aa6b2fe8cd56923.jpg");
+  
 }
 
 .nav a {
@@ -16,15 +18,15 @@
 .nav-title {
   font-size: 24px;
   font-weight: 700;
-  color: #f2f2f2;
+  color: #a39595;
   padding-left: 10px;
   margin: 0;
 }
 
 .navLink {
   display: inline-block;
-  color: #f2f2f2;
-  background-color: #00acb0;
+  color: #0f0e0e;
+  background-color: #767c7c;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -38,5 +40,15 @@
 }
 
 .navLink:hover {
-  background-color: #008183;
+  background-color: #a1a8a8;
+}
+
+.head {
+  color: rgba(12, 175, 20, 0.596);
+}
+
+
+.button {
+  background-color: grey;
+  color: black;
 }

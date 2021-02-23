@@ -1,0 +1,13 @@
+.head {
+    color: black;
+}
+
+
+.button {
+    background-color: grey;
+    color: black;
+}
+
+.paper {
+    min-height: 100vh;
+}

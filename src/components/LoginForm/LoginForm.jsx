@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { Paper, Typography } from '@material-ui/core';
+import './LogIn.css'
 
 function LoginForm() {
+
+
+  const theme = createMuiTheme({
+    palette: {
+type: "dark",
+    },
+  });
+
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
@@ -25,15 +37,16 @@ function LoginForm() {
   }; // end login
 
   return (
+
     <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+      <h2 className="head" >Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
       <div>
-        <label htmlFor="username">
+        <label htmlFor="username" className="head">
           Username:
           <input
             type="text"
@@ -45,7 +58,7 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <label htmlFor="password">
+        <label htmlFor="password" className="head">
           Password:
           <input
             type="password"
@@ -57,9 +70,10 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <input className="button" type="submit" name="submit" value="Log In" />
       </div>
     </form>
+
   );
 }
 
